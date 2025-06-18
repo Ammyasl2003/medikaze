@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Available Medicines</h2>
+<div class="medicine-grid">
+  {% for med in medicines %}
+    <div class="medicine-card">
+      <h3>{{ med.name }}</h3>
+      <p>₹{{ med.price }}</p>
+      <p>Stock: {{ med.stock }}</p>
+      <a href="{{ url_for('add_to_cart', med_id=med.id) }}" class="btn">Add to Cart</a>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

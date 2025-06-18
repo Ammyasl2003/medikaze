@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Medikaze</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Medikaze 💊</h1>
+    <nav>
+  <a href="/">Home</a>
+  <a href="/cart">Cart</a>
+  {% if session.get('user') %}
+    {% if session.get('is_admin') %}
+      <a href="/admin">Admin</a>
+    {% endif %}
+    <span>👤 {{ session['user'] }}</span>
+    <a href="/logout">Logout</a>
+  {% else %}
+    <a href="/login">Login</a>
+    <a href="/signup">Signup</a>
+    {% if session.get('is_admin') %}
+  <a href="/admin">Admin</a>
+  <a href="/admin/orders">Orders</a>
+{% endif %}
+    <a href="tel:112" class="help-btn" title="Call for help!">🚨 Help</a>
+
+  {% endif %}
+</nav>
+
+  </header>
+  <main>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

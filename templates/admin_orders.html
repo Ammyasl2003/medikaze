@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>📦 Confirmed Orders</h2>
+{% for order in orders %}
+  <div class="order-box">
+    <strong>User:</strong> {{ order.user }} <br>
+    <strong>Date:</strong> {{ order.timestamp.strftime('%Y-%m-%d %H:%M') }} <br>
+    <ul>
+      {% for item in order.items %}
+        <li>{{ item.med_name }} — ₹{{ item.med_price }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endfor %}
+{% endblock %}
